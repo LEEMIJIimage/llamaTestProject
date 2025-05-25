@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Code LLaMA</title>
+</head>
+<body>
+  <h1>Code LLaMA<br>- 코딩 AI</h1>
+  <form method="post">
+      <textarea name="prompt" rows="5" cols="80">{{ request.form.prompt }}</textarea><br>
+      <button type="submit">코드 생성</button>
+  </form>
+
+  {% if result %}
+      <hr>
+      <pre>{{ result }}</pre>  <!-- 여기 pre 태그 사용 -->
+  {% endif %}
+</body>
+</html>
