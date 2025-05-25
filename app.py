@@ -15,7 +15,7 @@ def index():
     result = ""
     if request.method == "POST":
         prompt = request.form["prompt"]
-        result = generate_text(prompt)  # 여기 수정!
+        result = generate_text(prompt)
     return render_template("index.html", result=result)
 
 if __name__ == "__main__":
