@@ -1,0 +1,26 @@
+# Python 가상환경
+venv/
+.env
+
+# 모델 파일은 컨테이너 외부에서 마운트
+models/
+*.pt
+*.bin
+*.gguf
+
+# Python 캐시/컴파일 파일
+__pycache__/
+*.py[cod]
+*.so
+
+# 로그 및 임시 파일
+*.log
+*.tmp
+
+# macOS, Windows 시스템 파일
+.DS_Store
+Thumbs.db
+
+# Git 관련
+.git
+.gitignore
