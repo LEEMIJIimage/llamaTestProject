@@ -1,0 +1,37 @@
+name: Deploy to Cloud Server
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v2
+
+    - name: 🚀 Deploy via SSH
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.DEPLOY_KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd ~/llamaTestProject
+          git pull origin main
+
+          echo "🧱 Building Docker image..."
+          docker build -t llama-ai .
+
+          echo "🛑 Stopping old container (if any)..."
+          docker stop llama || true
+          docker rm llama || true
+
+          echo "🚀 Starting new container..."
+          docker run -d \
+            -v ~/llamaTestProject/models:/app/models \
+            -p 5000:5000 \
+            --name llama llama-ai
